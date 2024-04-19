@@ -43,3 +43,5 @@ let unique_with_prefix p name =
   in
   let name = unique_ name in
   p ^ String.make 1 split_char ^ name
+
+let has_been_uniqified name = String.contains name split_char
