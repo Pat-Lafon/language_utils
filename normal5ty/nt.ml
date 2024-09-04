@@ -61,6 +61,8 @@ let eq x y =
         String.equal id1 id2
         && List.length args1 == List.length args2
         && List.for_all2 (fun a b -> aux (a, b)) args1 args2
+    (* To allow pattern matching on bool's*)
+    | Ty_bool, Ty_constructor ("bool", []) | Ty_constructor ("bool", []), Ty_bool -> true
     | _ -> false
   in
   aux (x, y)
