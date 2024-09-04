@@ -16,13 +16,15 @@ module List = struct
 
   let substract eq a b = List.filter (fun x -> not (List.exists (eq x) b)) a
 
+  let substract_elm eq a b = List.filter (fun x -> not (eq x b)) a
+
   let slow_rm_dup eq a =
     let rec aux res = function
       | [] -> res
       | h :: t ->
-          if List.exists (eq h) res then aux res t else aux (res @ [ h ]) t
+          if List.exists (eq h) res then aux res t else aux (h :: res) t
     in
-    aux [] a
+    aux [] a |> List.rev
 
   let mid_partition l =
     let mid = length l / 2 in
