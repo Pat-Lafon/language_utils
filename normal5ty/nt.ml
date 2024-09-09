@@ -68,6 +68,8 @@ let eq x y =
         List.equal
           (fun (x1, t1) (x2, t2) -> String.equal x1 x2 && aux (t1, t2))
           l1 l2
+    (* To allow pattern matching on bool's*)
+    | Ty_bool, Ty_constructor ("bool", []) | Ty_constructor ("bool", []), Ty_bool -> true
     | _ -> false
   in
   aux (x, y)
