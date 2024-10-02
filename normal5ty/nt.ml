@@ -1,5 +1,7 @@
 open Sexplib.Std
 open Sugar
+open Ppx_compare_lib.Builtin
+open Ppx_hash_lib.Std.Hash.Builtin
 
 type t =
   | Ty_any (* parsing only *)
@@ -14,7 +16,7 @@ type t =
   | Ty_uninter of string
   | Ty_constructor of (string * t list)
   | Ty_record of (string * t) list
-[@@deriving sexp]
+[@@deriving sexp, compare, hash]
 
 let _unique_type_var_name = ref 0
 
