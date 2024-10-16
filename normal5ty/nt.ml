@@ -204,7 +204,7 @@ let __type_unify_ (pprint : t -> string) file line m t1 t2 =
     | Ty_unknown, _ -> (m, t2)
     | Ty_var n, t2 -> (
         match StrMap.find_opt m n with
-        | Some _ -> _failatwith __FILE__ __LINE__ ""
+        | Some _ -> _failatwith __FILE__ __LINE__ (n ^ layout t2)
         | None ->
             let m = StrMap.add n t2 m in
             (m, t2))
