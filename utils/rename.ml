@@ -44,4 +44,7 @@ let unique_with_prefix p name =
   let name = unique_ name in
   p ^ String.make 1 split_char ^ name
 
-let has_been_uniqified name = String.contains name split_char
+let has_been_uniqified name =
+    match String.split_on_char split_char name with
+    | [_; y] when int_of_string_opt y |> Option.is_some -> true
+      | _ -> false
