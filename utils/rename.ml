@@ -1,7 +1,7 @@
 let universe_label = ref 0
 
 let name () =
-  let n = Printf.sprintf "_x%i" !universe_label in
+  let n = Printf.sprintf "idx%i" !universe_label in
   universe_label := !universe_label + 1;
   n
 
