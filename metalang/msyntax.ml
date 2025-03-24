@@ -51,17 +51,3 @@ let handle_type_declaration predefine (sourcefile : string) : string =
   let res = Pprintast.string_of_structure res in
   let sourcefile = List.last @@ String.split_on_char '/' sourcefile in
   Printf.sprintf "%s\n(* Generated from %s *)\n" res sourcefile
-
-let%test "test" =
-  let _predefine =
-    mk_predefines
-      [
-        PreDefTyped "raw_term"; PreDefTyped "raw_match_case"; PreDefPlain "rty";
-      ]
-  in
-  let dir = "/Users/zhezhou/workspace/research/language_utils/metalang/" in
-  let res = handle_type_declaration _predefine (dir ^ "_rty.ml") in
-  let oc = open_out (dir ^ "test.ml") in
-  Printf.fprintf oc "%s\n" res;
-  close_out oc;
-  true
