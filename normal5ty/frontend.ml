@@ -59,7 +59,7 @@ and core_type_desc_to_t t =
       (* | [ "list" ], [ t ] -> T.Ty_constructor ("list", [ core_type_to_t t ]) *)
       | [ c ], args -> T.Ty_constructor (c, List.map core_type_to_t args)
       | cs, [] ->
-          T.Ty_uninter (Zzdatatype.Datatype.List.split_by "." (fun x -> x) cs)
+          T.Ty_uninter (String.concat "." cs)
       | _, _ ->
           failwith @@ Printf.sprintf "--un-imp??: %s" (layout_ @@ desc_to_ct t))
 
@@ -128,7 +128,7 @@ let%test "parse1" = T.eq T.int_ty (of_string "int")
 let%test "parse2" = T.eq T.bool_ty (of_string "bool")
 let%test "parse3" = T.eq T.(mk_arr bool_ty int_ty) (of_string "bool -> int")
 let%test "parse4" = T.eq T.(mk_arr bool_ty int_ty) (of_string "bool -> int")
-let%test "parse5" = T.eq T.(uninter_ty "path") (of_string "path")
+let%test "parse5" = T.eq T.(Ty_constructor ("path", [])) (of_string "path")
 let%test "parse6" = T.eq T.(uninter_ty "Path.t") (of_string "Path.t")
 
 let%test "parse7" =
