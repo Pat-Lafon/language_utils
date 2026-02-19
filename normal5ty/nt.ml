@@ -273,7 +273,7 @@ let __type_unify_v1 pprint file line t1 t2 =
 let __type_unify_v2 (pprint : t -> string) file line t1 t2 =
   let m = type_unification_v2 StrMap.empty [ (t1, t2) ] in
   let error_print () =
-    Printf.printf "Type unify error: %s ==> %s\n" (pprint t1) (pprint t2);
+    Printf.eprintf "Type unify error: %s ==> %s\n" (pprint t1) (pprint t2);
     _failatwith file line "normal type check error"
   in
   match m with
